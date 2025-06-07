@@ -53,22 +53,30 @@ const schemaInfo = {
 
 const im = {
   _id: "57231f1a30e4351f4e9f4bd7",
+  login_name: "im",
+  password: "123",
   first_name: "Ian",
   last_name: "Malcolm",
   location: "Austin, TX",
   description: "Should've stayed in the car.",
   occupation: "Mathematician",
+  created_date: "2025-06-05T09:42:18.664+00:00"
 };
 const er = {
   _id: "57231f1a30e4351f4e9f4bd8",
+  login_name: "er",
+  password: "123",
   first_name: "Ellen",
   last_name: "Ripley",
   location: "Nostromo",
   description: "Lvl 6 rating. Pilot.",
   occupation: "Warrant Officer",
+  created_date: "2025-06-05T09:42:18.664+00:00"
 };
 const pt = {
   _id: "57231f1a30e4351f4e9f4bd9",
+  login_name: "pt",
+  password: "123",
   first_name: "Peregrin",
   last_name: "Took",
   location: "Gondor",
@@ -78,30 +86,40 @@ const pt = {
     "until the stars are all alight... Mist and shadow, cloud and shade, " +
     "all shall fade... all... shall... fade... ",
   occupation: "Thain",
+  created_date: "2025-06-05T09:42:18.664+00:00"
 };
 const rk = {
   _id: "57231f1a30e4351f4e9f4bda",
+  login_name: "rk",
+  password: "123",
   first_name: "Rey",
   last_name: "Kenobi",
   location: "D'Qar",
   description: "Excited to be here!",
   occupation: "Rebel",
+  created_date: "2025-06-05T09:42:18.664+00:00"
 };
 const al = {
   _id: "57231f1a30e4351f4e9f4bdb",
+  login_name: "al",
+  password: "123",
   first_name: "April",
   last_name: "Ludgate",
   location: "Pawnee, IN",
   description: "Witch",
   occupation: "Animal Control",
+  created_date: "2025-06-05T09:42:18.664+00:00"
 };
 const jo = {
   _id: "57231f1a30e4351f4e9f4bdc",
+  login_name: "jo",
+  password: "123",
   first_name: "John",
   last_name: "Ousterhout",
   location: "Stanford, CA",
   description: "<i>CS142!</i>",
   occupation: "Professor",
+  created_date: "2025-06-05T09:42:18.664+00:00"
 };
 
 const users = [im, er, pt, rk, al, jo];
