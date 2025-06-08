@@ -141,4 +141,72 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Xóa một photo theo id
+router.delete("/:photoId", async (req, res) => {
+  try {
+    const photo = await Photo.findById(req.params.photoId);
+    // console.log("photo:", photo);
+    if (!photo) {
+      return res.status(404).json({ error: "Photo not found" });
+    }
+    // Bỏ kiểm tra quyền nếu chưa có xác thực
+    await photo.deleteOne();
+    res.json({ message: "Photo deleted successfully" });
+  } catch (err) {
+    console.error("Delete photo error:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.delete("/comment/:photoId/:commentId", async(req, res) => {
+  try {
+    const { photoId, commentId } = req.params;
+    const photo = await Photo.findById(photoId);
+    if (!photo) {
+      return res.status(404).json({ error: "Photo not found" });
+    }
+
+    const commentIndex = photo.comments.findIndex((c) => c._id.toString() === commentId);
+    if (commentIndex === -1) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    photo.comments.splice(commentIndex, 1);
+    await photo.save();
+
+    res.json({ message: "Comment deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Sửa một comment trong photo
+router.put("/comment/:photoId/:commentId", async (req, res) => {
+  try {
+    const { photoId, commentId } = req.params;
+    const { comment } = req.body;
+
+    if (!comment || comment.trim().length === 0) {
+      return res.status(400).json({ error: "Comment cannot be empty" });
+    }
+
+    const photo = await Photo.findById(photoId);
+    if (!photo) {
+      return res.status(404).json({ error: "Photo not found" });
+    }
+
+    const commentObj = photo.comments.id(commentId);
+    if (!commentObj) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    commentObj.comment = comment;
+    await photo.save();
+
+    res.json({ message: "Comment updated successfully", comment: commentObj });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;
