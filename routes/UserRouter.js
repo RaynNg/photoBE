@@ -117,4 +117,23 @@ router.get("/comment/:userId", async (req, res) => {
   }
 });
 
+// Sửa thông tin user
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { first_name, last_name, location, description, occupation } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { first_name, last_name, location, description, occupation },
+      { new: true }
+    ).select("_id first_name last_name location description occupation");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
